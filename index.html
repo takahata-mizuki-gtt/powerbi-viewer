@@ -6,7 +6,43 @@
   <title>Power BI Dashboard</title>
 </head>
 <body style="margin:0">
-  <!-- <iframe title="PMH(Public Medical Hub)接続医療機関・薬局 1" width="1140" height="541.25" src="https://app.powerbi.com/view?r=eyJrIjoiMTU2ZWZiYWItMTUwYy00ZmM4LWJkMzctMzNjY2IzZmI4NjVkIiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9"></iframe> -->
-　<iframe title="令和７年度「都民のAIに関する意識調査」_ver2.0" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiYWIzMzIwOWQtZDUwNy00M2Y5LThjZmYtOGE2YThhNDk2NmY0IiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9" frameborder="0" allowFullScreen="true"></iframe>
+
+<div id="pbi-container" style="position:relative; width:100%;">
+  <iframe id="pbi-frame"
+    width="100%"
+    height="600"
+    frameborder="0"
+    allowFullScreen="true">
+  </iframe>
+</div>
+
+<script>
+  // PC用・スマホ用それぞれのPublish to Web URL
+  const REPORT_URL = {
+    pc:     "https://app.powerbi.com/view?r=eyJrIjoiYWIzMzIwOWQtZDUwNy00M2Y5LThjZmYtOGE2YThhNDk2NmY0IiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9",
+    mobile: "https://app.powerbi.com/view?r=eyJrIjoiMTU2ZWZiYWItMTUwYy00ZmM4LWJkMzctMzNjY2IzZmI4NjVkIiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9"
+  };
+
+  function selectReportUrl() {
+    // 画面幅ベースで判定(推奨:リサイズより信頼性が高い)
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    return isMobile ? REPORT_URL.mobile : REPORT_URL.pc;
+  }
+
+  const frame = document.getElementById("pbi-frame");
+  frame.src = selectReportUrl();
+
+  // 画面回転・ウィンドウリサイズにも追従させたい場合
+  let lastIsMobile = window.matchMedia("(max-width: 768px)").matches;
+  window.addEventListener("resize", () => {
+    const nowIsMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (nowIsMobile !== lastIsMobile) {
+      lastIsMobile = nowIsMobile;
+      frame.src = selectReportUrl(); // 再読み込みが必要(部分書き換え不可)
+    }
+  });
+</script>
+
+
 </body>
 </html>
