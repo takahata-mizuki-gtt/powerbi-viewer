@@ -5,12 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Power BI Dashboard</title>
     <style>
-    .pbi-mobile { display: none; }
+.pbi-mobile { display: none; }
 
-    @media (max-width: 768px) {
-      .pbi-pc { display: none; }
-      .pbi-mobile { display: block; }
-    }
+@media (max-width: 768px) {
+  .pbi-pc { display: none; }
+
+  .pbi-mobile {
+    display: block;
+  }
+
+  .pbi-mobile iframe {
+    width: 100%;
+    aspect-ratio: 1 / 2;  /* Power BI側のキャンバス比率(幅:高さ)と合わせる */
+    height: auto;
+    border: none;
+  }
+}
   </style>
 </head>
 <body style="margin:0">
@@ -20,7 +30,7 @@
 </div>
 
 <div class="pbi-mobile">
-  <iframe title="令和７年度「都民のAIに関する意識調査」スマホ検証" width="720" height="1300" src="https://app.powerbi.com/reportEmbed?reportId=3ec1c6a2-5e1d-40df-8c5b-a8cfc3ed255f&autoAuth=true&ctid=9d3e2e69-df2b-4c53-bac1-dd09f0728a7d&pageName=9d13bed8d8153f3e5132" frameborder="0" allowFullScreen="true"></iframe>
+  <iframe title="令和７年度「都民のAIに関する意識調査」スマホ検証" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=3ec1c6a2-5e1d-40df-8c5b-a8cfc3ed255f&autoAuth=true&ctid=9d3e2e69-df2b-4c53-bac1-dd09f0728a7d&pageName=9d13bed8d8153f3e5132" frameborder="0" allowFullScreen="true"></iframe>
 </div>
 
 </body>
