@@ -4,45 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Power BI Dashboard</title>
+    <style>
+    .pbi-mobile { display: none; }
+
+    @media (max-width: 768px) {
+      .pbi-pc { display: none; }
+      .pbi-mobile { display: block; }
+    }
+  </style>
 </head>
 <body style="margin:0">
 
-<div id="pbi-container" style="position:relative; width:100%;">
-  <iframe id="pbi-frame"
-    width="100%"
-    height="600"
-    frameborder="0"
-    allowFullScreen="true">
-  </iframe>
+<div class="pbi-pc">
+  <iframe src="https://app.powerbi.com/view?r=eyJrIjoiYWIzMzIwOWQtZDUwNy00M2Y5LThjZmYtOGE2YThhNDk2NmY0IiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9" 
+    width="100%" height="600" frameborder="0"></iframe>
 </div>
 
-<script>
-  // PC用・スマホ用それぞれのPublish to Web URL
-  const REPORT_URL = {
-    pc:     "https://app.powerbi.com/view?r=eyJrIjoiYWIzMzIwOWQtZDUwNy00M2Y5LThjZmYtOGE2YThhNDk2NmY0IiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9",
-    mobile: "https://app.powerbi.com/view?r=eyJrIjoiMTU2ZWZiYWItMTUwYy00ZmM4LWJkMzctMzNjY2IzZmI4NjVkIiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9"
-  };
-
-  function selectReportUrl() {
-    // 画面幅ベースで判定(推奨:リサイズより信頼性が高い)
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    return isMobile ? REPORT_URL.mobile : REPORT_URL.pc;
-  }
-
-  const frame = document.getElementById("pbi-frame");
-  frame.src = selectReportUrl();
-
-  // 画面回転・ウィンドウリサイズにも追従させたい場合
-  let lastIsMobile = window.matchMedia("(max-width: 768px)").matches;
-  window.addEventListener("resize", () => {
-    const nowIsMobile = window.matchMedia("(max-width: 768px)").matches;
-    if (nowIsMobile !== lastIsMobile) {
-      lastIsMobile = nowIsMobile;
-      frame.src = selectReportUrl(); // 再読み込みが必要(部分書き換え不可)
-    }
-  });
-</script>
-
+<div class="pbi-mobile">
+  <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMTU2ZWZiYWItMTUwYy00ZmM4LWJkMzctMzNjY2IzZmI4NjVkIiwidCI6IjlkM2UyZTY5LWRmMmItNGM1My1iYWMxLWRkMDlmMDcyOGE3ZCJ9" 
+    width="100%" height="600" frameborder="0"></iframe>
+</div>
 
 </body>
 </html>
